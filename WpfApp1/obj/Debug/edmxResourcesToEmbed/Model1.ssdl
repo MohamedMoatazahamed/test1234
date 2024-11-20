@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MangesystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Tasks123">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="50" />
+    <Property Name="Descrption" Type="varchar" MaxLength="50" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
+    <Property Name="DueDate" Type="datetime" />
+    <Property Name="userID" Type="int" />
+  </EntityType>
+  <EntityType Name="usertable123">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="role" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__Tasks123__userID__398D8EEE">
+    <End Role="usertable123" Type="Self.usertable123" Multiplicity="0..1" />
+    <End Role="Tasks123" Type="Self.Tasks123" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usertable123">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="Tasks123">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MangesystemModelStoreContainer">
+    <EntitySet Name="Tasks123" EntityType="Self.Tasks123" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usertable123" EntityType="Self.usertable123" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Tasks123__userID__398D8EEE" Association="Self.FK__Tasks123__userID__398D8EEE">
+      <End Role="usertable123" EntitySet="usertable123" />
+      <End Role="Tasks123" EntitySet="Tasks123" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

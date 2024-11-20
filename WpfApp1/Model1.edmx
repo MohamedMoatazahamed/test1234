@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MangesystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tasks123">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="50" />
+          <Property Name="Descrption" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="DueDate" Type="datetime" />
+          <Property Name="userID" Type="int" />
+        </EntityType>
+        <EntityType Name="usertable123">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="role" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Tasks123__userID__398D8EEE">
+          <End Role="usertable123" Type="Self.usertable123" Multiplicity="0..1" />
+          <End Role="Tasks123" Type="Self.Tasks123" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usertable123">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Tasks123">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MangesystemModelStoreContainer">
+          <EntitySet Name="Tasks123" EntityType="Self.Tasks123" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usertable123" EntityType="Self.usertable123" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Tasks123__userID__398D8EEE" Association="Self.FK__Tasks123__userID__398D8EEE">
+            <End Role="usertable123" EntitySet="usertable123" />
+            <End Role="Tasks123" EntitySet="Tasks123" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MangesystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tasks123">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descrption" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
+          <Property Name="userID" Type="Int32" />
+          <NavigationProperty Name="usertable123" Relationship="Self.FK__Tasks123__userID__398D8EEE" FromRole="Tasks123" ToRole="usertable123" />
+        </EntityType>
+        <EntityType Name="usertable123">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tasks123" Relationship="Self.FK__Tasks123__userID__398D8EEE" FromRole="usertable123" ToRole="Tasks123" />
+        </EntityType>
+        <Association Name="FK__Tasks123__userID__398D8EEE">
+          <End Role="usertable123" Type="Self.usertable123" Multiplicity="0..1" />
+          <End Role="Tasks123" Type="Self.Tasks123" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usertable123">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Tasks123">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MangesystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tasks123" EntityType="Self.Tasks123" />
+          <EntitySet Name="usertable123" EntityType="Self.usertable123" />
+          <AssociationSet Name="FK__Tasks123__userID__398D8EEE" Association="Self.FK__Tasks123__userID__398D8EEE">
+            <End Role="usertable123" EntitySet="usertable123" />
+            <End Role="Tasks123" EntitySet="Tasks123" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MangesystemModelStoreContainer" CdmEntityContainer="MangesystemEntities">
+          <EntitySetMapping Name="Tasks123">
+            <EntityTypeMapping TypeName="MangesystemModel.Tasks123">
+              <MappingFragment StoreEntitySet="Tasks123">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="Descrption" ColumnName="Descrption" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usertable123">
+            <EntityTypeMapping TypeName="MangesystemModel.usertable123">
+              <MappingFragment StoreEntitySet="usertable123">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

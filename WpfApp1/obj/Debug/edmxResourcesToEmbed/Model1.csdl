@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MangesystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Tasks123">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Descrption" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
+    <Property Name="userID" Type="Int32" />
+    <NavigationProperty Name="usertable123" Relationship="Self.FK__Tasks123__userID__398D8EEE" FromRole="Tasks123" ToRole="usertable123" />
+  </EntityType>
+  <EntityType Name="usertable123">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Tasks123" Relationship="Self.FK__Tasks123__userID__398D8EEE" FromRole="usertable123" ToRole="Tasks123" />
+  </EntityType>
+  <Association Name="FK__Tasks123__userID__398D8EEE">
+    <End Role="usertable123" Type="Self.usertable123" Multiplicity="0..1" />
+    <End Role="Tasks123" Type="Self.Tasks123" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usertable123">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="Tasks123">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MangesystemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Tasks123" EntityType="Self.Tasks123" />
+    <EntitySet Name="usertable123" EntityType="Self.usertable123" />
+    <AssociationSet Name="FK__Tasks123__userID__398D8EEE" Association="Self.FK__Tasks123__userID__398D8EEE">
+      <End Role="usertable123" EntitySet="usertable123" />
+      <End Role="Tasks123" EntitySet="Tasks123" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
